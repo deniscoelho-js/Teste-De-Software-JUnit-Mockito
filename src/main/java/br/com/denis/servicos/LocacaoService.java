@@ -1,12 +1,12 @@
-package br.ce.wcaquino.servicos;
+package br.com.denis.servicos;
 
-import static br.ce.wcaquino.utils.DataUtils.adicionarDias;
+import static br.com.denis.utils.DataUtils.adicionarDias;
 
 import java.util.Date;
 
-import br.ce.wcaquino.entidades.Filme;
-import br.ce.wcaquino.entidades.Locacao;
-import br.ce.wcaquino.entidades.Usuario;
+import br.com.denis.entidades.Filme;
+import br.com.denis.entidades.Locacao;
+import br.com.denis.entidades.Usuario;
 
 public class LocacaoService {
 	
