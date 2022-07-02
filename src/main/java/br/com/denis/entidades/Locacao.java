@@ -2,6 +2,7 @@ package br.com.denis.entidades;
 
 import java.util.Date;
 
+
 public class Locacao {
 
 	private Usuario usuario;
