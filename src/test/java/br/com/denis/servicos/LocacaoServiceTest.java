@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -31,10 +33,10 @@ public class LocacaoServiceTest {
 //		cenário
 		LocacaoService service = new LocacaoService();
 		Usuario usuario = new Usuario("usuario 1");
-		Filme filme = new Filme("filme 1", 1, 5.0);
+		List<Filme> filmes = Arrays.asList(new Filme("filme 1", 1, 5.0)) ;
 
 //		ação
-		Locacao locacao = service.alugarFilme(usuario, filme);
+		Locacao locacao = service.alugarFilme(usuario, filmes);
 
 //		verificacao
 		assertEquals(5.0, locacao.getValor(), 0.01);
@@ -47,10 +49,10 @@ public class LocacaoServiceTest {
 //		cenário
 		LocacaoService service = new LocacaoService();
 		Usuario usuario = new Usuario("usuario 1");
-		Filme filme = new Filme("filme 1", 0, 5.0);
+		List<Filme> filmes = Arrays.asList(new Filme("filme 1", 0, 5.0)) ;
 
 //		ação
-		service.alugarFilme(usuario, filme);
+		service.alugarFilme(usuario, filmes);
 
 	}
 
@@ -58,13 +60,13 @@ public class LocacaoServiceTest {
 	public void testLocacao_usuarioVazio() throws FilmesSemEstoqueException {
 //		cenario
 		LocacaoService service = new LocacaoService();
-		Filme filme = new Filme("filme 1", 1, 5.0);
+		List<Filme> filmes = Arrays.asList(new Filme("filme 1", 1, 5.0)) ;
 
 		
 //		acao
 		
 			try {
-				service.alugarFilme(null, filme);
+				service.alugarFilme(null, filmes);
 				Assert.fail();
 			}  catch (LocadoraException e) {
 				// TODO Auto-generated catch block
