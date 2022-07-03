@@ -2,7 +2,7 @@ package br.com.denis.servicos;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+//import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -56,24 +56,24 @@ public class LocacaoServiceTest {
 
 	}
 
-	@Test
-	public void testLocacao_usuarioVazio() throws FilmesSemEstoqueException {
-//		cenario
-		LocacaoService service = new LocacaoService();
-		List<Filme> filmes = Arrays.asList(new Filme("filme 1", 1, 5.0)) ;
-
-		
-//		acao
-		
-			try {
-				service.alugarFilme(null, filmes);
-				Assert.fail();
-			}  catch (LocadoraException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-
-	}
+//	@Test
+//	public void testLocacao_usuarioVazio() throws FilmesSemEstoqueException {
+////		cenario
+//		LocacaoService service = new LocacaoService();
+//		List<Filme> filmes = Arrays.asList(new Filme("filme 1", 1, 5.0)) ;
+//
+//		
+////		acao
+//		
+//			try {
+//				service.alugarFilme(null, filmes);
+//				Assert.fail();
+//			}  catch (LocadoraException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		
+//
+//	}
 
 }
