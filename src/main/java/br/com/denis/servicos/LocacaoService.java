@@ -2,6 +2,7 @@ package br.com.denis.servicos;
 
 import static br.com.denis.utils.DataUtils.adicionarDias;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import br.com.denis.entidades.Locacao;
 import br.com.denis.entidades.Usuario;
 import br.com.denis.exceptions.FilmesSemEstoqueException;
 import br.com.denis.exceptions.LocadoraException;
+import br.com.denis.utils.DataUtils;
 
 public class LocacaoService {
 
@@ -23,28 +25,47 @@ public class LocacaoService {
 		if (filmes == null || filmes.isEmpty()) {
 			throw new LocadoraException("Filme vazio");
 		}
-		for(Filme filme : filmes) {
+		for (Filme filme : filmes) {
 			if (filme.getEstoque() == 0) {
 				throw new FilmesSemEstoqueException();
 			}
 		}
-	
 
-	Locacao locacao = new Locacao();
-	locacao.setFilmes(filmes);
-	locacao.setUsuario(usuario);
-	locacao.setDataLocacao(new Date());
-	Double valorTotal = 0d;
-	
-	for(Filme filme : filmes) {
-		valorTotal += filme.getPrecoLocacao();
-	}
-	
-	locacao.setValor(valorTotal);
+		Locacao locacao = new Locacao();
+		locacao.setFilmes(filmes);
+		locacao.setUsuario(usuario);
+		locacao.setDataLocacao(new Date());
+		Double valorTotal = 0d;
 
-	// Entrega no dia seguinte
-	Date dataEntrega = new Date();
-	dataEntrega = adicionarDias(dataEntrega, 1);
+		for (int i = 0; i < filmes.size(); i++) {
+			Filme filme = filmes.get(i);
+			Double valorFilme = filme.getPrecoLocacao();
+			switch (i) {
+			case 2:
+				valorFilme = valorFilme * 0.75;
+				break;
+			case 3:
+				valorFilme = valorFilme * 0.50;
+				break;
+			case 4:
+				valorFilme = valorFilme * 0.25;
+				break;
+			case 5:
+				valorFilme = 0d;
+				break;
+			}
+
+			valorTotal += valorFilme;
+		}
+
+		locacao.setValor(valorTotal);
+		
+// 		Entrega no dia seguinte
+		Date dataEntrega = new Date();
+		dataEntrega = adicionarDias(dataEntrega, 1);
+		if(DataUtils.verificarDiaSemana(dataEntrega, Calendar.MONDAY)) {
+			dataEntrega = adicionarDias(dataEntrega, 1);
+		}
 		locacao.setDataRetorno(dataEntrega);
 
 		// Salvando a locacao...
